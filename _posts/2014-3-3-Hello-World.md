@@ -5,4 +5,4 @@ title: Ciao
 
 Primo post di prova.
 
-![Prova]({{ jimbolimbo3@github.io }}/images/an1.jpg)
+![Prova]({{ jimbolimbo3@github.io }}/images/an1.jpeg)
