@@ -4,4 +4,4 @@ title: Ciao
 ---
 
 Primo post di prova
-({{ site.baseurl }}/images/an1.jpg)
+![_config.yml]({{ site.baseurl }}/images/an1.jpg)
