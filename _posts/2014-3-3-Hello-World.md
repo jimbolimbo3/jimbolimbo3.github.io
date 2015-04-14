@@ -3,6 +3,6 @@ layout: post
 title: Ciao
 ---
 
-Primo post di prova
+Primo post di prova.
 
-![_config.yml]({{ site.baseurl }}/images/Pug.jpg)
+![Prova]({{ jimbolimbo3@github.io }}/images/an1.jpeg)
