@@ -20,11 +20,11 @@ First, you need:
 - 30 minutes of time
 
 **The circuit:**
+![photon-dht22]({{site.baseurl}}/images/photon-dht22.png)
 
-![Photon and DHT22]({{site.baseurl}}\images\2015\09\photon-dht22.png)
 
 
-Download [here]({{site.baseurl}}\files\Particle-Photon-DHT22.fzz) the circuit design for Fritzing.
+Download [here]({{site.baseurl}}/files/Particle-Photon-DHT22.fzz) the circuit design for Fritzing.
 
 Connect you Photon/Core and go to https://build.particle.io/build
 Insert this code, adding as well the library *"PietteTech_DHT/PietteTech_DHT.h"*.
