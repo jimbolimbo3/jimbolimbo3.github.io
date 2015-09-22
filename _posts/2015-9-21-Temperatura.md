@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Home Temperature and Humidity
+title: Home Temperature and Humidity on your phone with Particle Photon, DHT22, IFTTT and Numerous app
 ---
 
 <div align=center><iframe src="http://n.numerousapp.com/e/1bou1sfzbjtxx?borderColor=F4F4F4" width="250" height="250" frameBorder="0" seamless scrolling="no"></iframe>
@@ -20,8 +20,9 @@ First, you need:
 - 30 minutes of time
 
 **The circuit:**
-
+<div align=center>
 ![Photon and DHT22]({{site.baseurl}}/images/photon-dht22.png)
+</div>
 
 Download [here]({{site.baseurl}}/Particle-Photon-DHT22.fzz) the circuit design for Fritzing.
 
