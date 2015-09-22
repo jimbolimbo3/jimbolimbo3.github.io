@@ -9,7 +9,7 @@ title: Home Temperature and Humidity on your phone with Particle Photon, DHT22, 
 
 
 ---
-# How to?
+## How to?
 
 First, you need:
 - [Particle Photon/Core](https://store.particle.io/)
@@ -19,7 +19,11 @@ First, you need:
 - One [DTH22](http://it.aliexpress.com/item/DHT22-Digital-Temperature-And-Humidity-Sensor-Free-Shipping-Dropshipping/1738714600.html) Temperature/Humidity sensor
 - 30 minutes of time
 
-**The circuit:**
+# The circuit:
+
+
+
+
 ![photon-dht22]({{site.baseurl}}/images/photon-dht22.png)
 
 
