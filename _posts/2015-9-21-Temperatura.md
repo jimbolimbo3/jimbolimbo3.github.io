@@ -21,7 +21,7 @@ First, you need:
 
 **The circuit:**
 
-->![Photon and DHT22](\images\2015\09\photon-dht22.png)-<
+![Photon and DHT22](\images\2015\09\photon-dht22.png)
 
 
 Download [here]({{site.baseurl}}/Particle-Photon-DHT22.fzz) the circuit design for Fritzing.
