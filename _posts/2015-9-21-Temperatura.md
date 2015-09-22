@@ -19,6 +19,12 @@ First, you need:
 - One [DTH22](http://it.aliexpress.com/item/DHT22-Digital-Temperature-And-Humidity-Sensor-Free-Shipping-Dropshipping/1738714600.html) Temperature/Humidity sensor
 - 30 minutes of time
 
+**The circuit:**
+
+![Photon and DHT22]({{site.baseurl}}/images/photon-dht22.png)
+
+Download [here]({{site.baseurl}}/Particle-Photon-DHT22.fzz) the circuit design for Fritzing.
+
 Connect you Photon/Core and go to https://build.particle.io/build
 Insert this code, adding as well the library *"PietteTech_DHT/PietteTech_DHT.h"*.
 
