@@ -12,7 +12,7 @@ title: Home Temperature and Pressure on your phone with NodeMCU, BMP180, IFTTT a
 
 Download [bmp180.lua]({{site.baseurl}}/files/bmp180.lua) and [init.lua]({{site.baseurl}}/files/init.lua)
 
-
+Recently I built a simple sensor reader with a NodeMCU (ESP8266) and Bosch BMP180, both bought on AliExpress. For the code
 
 ---
 ## How to?
