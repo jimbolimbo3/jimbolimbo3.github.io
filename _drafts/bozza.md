@@ -12,18 +12,17 @@ title: Home Temperature and Pressure on your phone with NodeMCU, BMP180, IFTTT a
 
 Download [bmp180.lua]({{site.baseurl}}/files/bmp180.lua) and [init.lua]({{site.baseurl}}/files/init.lua)
 
-Recently I built a simple sensor reader with a NodeMCU (ESP8266) and Bosch BMP180, both bought on AliExpress. For the code
+Recently I built a simple sensor reader with a NodeMCU (ESP8266) and Bosch BMP180, both bought on AliExpress. [Here](http://www.aliexpress.com/item/New-Wireless-module-NodeMcu-Lua-WIFI-Internet-of-Things-development-board-based-ESP8266-with-pcb-Antenna/32299982691.html) you find the NodeMCU and [here](http://www.aliexpress.com/item/Free-Shipping-GY-68-1PCS-BMP180-Digital-Barometric-Pressure-Sensor-Board-Module-compatible-with-BMP085/1821004301.html) you find the BMP180 I bought.
 
 ---
 ## How to?
 
 
+First, you need to flash the firmware to NodeMCU, a light one that you can build on this site, because the library of BMP180 has some problem with memory. If you want you can use with [ESP8266Flasher]({{site.baseurl}}/files/ESP8266Flasher.exe) [this firmware(nodemcu-master-9-modules-2015-12-06-15-30-14-float.bin)]({{site.baseurl}}/files/nodemcu-master-9-modules-2015-12-06-15-30-14-float.bin) I built the 6th of December.
+Connect the 3v3 pin of BMP180 to the **3v3 pin** of NodeMCU (it's 5v tollerant, but I didn't try it), connect the ground, and use **D2 for sda** and **D3 for scl**.
+Flashed the firmware open either LUALoader or ESPlorer and flash BMP180.lua, the library, and init.lua, the script, to the NodeMCU: you can download here [bmp180.lua]({{site.baseurl}}/files/bmp180.lua) and [init.lua]({{site.baseurl}}/files/init.lua).
 
-
-
-
-
-
+![NodeMCU-BMP180]({{site.baseurl}}/images/NodeMCU-BMP180_bb.png)
 
 
 
@@ -89,7 +88,7 @@ conn:on("receive", function(conn, payload)
 --send pressure
 conn:on("connection", function(conn, payload) 
                        print('\nConnected') 
-                       conn:send("GET /trigger/node/with/key/YOURKEY?value1="
+                       conn:send("GET /trigger/MakerEvent/with/key/YOURKEY?value1="
                         ..p
 						.."&value2="
 						..t
@@ -112,3 +111,4 @@ end  --end della function sendData
 tmr.alarm(0, 15000, 1, function() sendData() end )
 ```
 
+The script read the pressure and the temperature every 15 seconds and send them to the Maker Channel of IFTTT, that you can set up at this [link](https://ifttt.com/maker), just add your Maker Event and your key to the script.
