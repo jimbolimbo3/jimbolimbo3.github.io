@@ -19,10 +19,10 @@ Actually I'm a NOOB, but I put my passion and fun in it.
 
 [luigi.sirito@gmail.com](mailto:luigi.sirito@gmail.com)
 
-<div align=center>
+
 ![Move Fast and Break Things]({{site.baseurl}}/images/move_fast_and_break_things.png)
 From [XKCD](https://xkcd.com/1428/).
-</div>
+
 
 ---
 
