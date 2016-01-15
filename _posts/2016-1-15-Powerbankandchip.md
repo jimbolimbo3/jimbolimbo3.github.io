@@ -1,10 +1,10 @@
 ---
 layout: post
-title: What I do when my mother breaks your powerbank
+title: What I do when my mother breaks my powerbank
 ---
 
 
-Fallen down, so dies my 10.000 mAh powerbank paid 15 euro on Amazon. But now... I have something to do with.
+Fallen down, so dies my 10.000 mAh powerbank paid 15 euro on Amazon. But now... I have something to do with. Thanks mom.
 
 ![C.H.I.P.]({{site.baseurl}}/images/chip.jpg)
 
