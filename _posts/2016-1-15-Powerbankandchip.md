@@ -15,7 +15,7 @@ I got my C.H.I.P 4 days ago, backed on [Kickstarter](https://www.kickstarter.com
 My powerbank has two cell, interconnected parts, 3.7 volts and 5.000 mAh per part: 
 ![C.H.I.P.]({{site.baseurl}}/images/batt1.jpg)
 
-falling got broken the USB port I guess, because nothing seems burned out:
+Falling got broken the USB port, I guess, because nothing seems burned out:
 
 ![C.H.I.P.]({{site.baseurl}}/images/batt3.jpg)
 
