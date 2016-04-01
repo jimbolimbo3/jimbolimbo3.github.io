@@ -3,13 +3,13 @@ layout: post
 title: Home Temperature and Humidity on your phone with Particle Photon, DHT22, IFTTT and Numerous app
 ---
 
-<div align=center><iframe src="http://n.numerousapp.com/e/1bou1sfzbjtxx?borderColor=F4F4F4" width="250" height="250" frameBorder="0" seamless scrolling="no"></iframe>
+<iframe src="http://n.numerousapp.com/e/1bou1sfzbjtxx?borderColor=F4F4F4" width="250" height="250" frameBorder="0" seamless scrolling="no"></iframe>
 
-<iframe src="http://n.numerousapp.com/e/dcja29zibvzi?borderColor=F4F4F4" width="250" height="250" frameBorder="0" seamless scrolling="no"></iframe> </div>
+<iframe src="http://n.numerousapp.com/e/dcja29zibvzi?borderColor=F4F4F4" width="250" height="250" frameBorder="0" seamless scrolling="no"></iframe>
 
 
 ---
-## How to?
+##How to?
 
 First, you need:
 - [Particle Photon/Core](https://store.particle.io/)
@@ -19,7 +19,7 @@ First, you need:
 - One [DTH22](http://it.aliexpress.com/item/DHT22-Digital-Temperature-And-Humidity-Sensor-Free-Shipping-Dropshipping/1738714600.html) Temperature/Humidity sensor
 - 30 minutes of time
 
-# The circuit:
+#The circuit:
 
 
 
