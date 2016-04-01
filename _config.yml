@@ -51,8 +51,13 @@ baseurl: ""
 # !! You don't need to change any of the configuration flags below !!
 #
 
+<<<<<<< HEAD
 markdown: kramdown
 highlighter: rouge
+=======
+# markdown: kramdown
+# highlighter: pygments
+>>>>>>> origin/master
 permalink: /:title/
 
 # The release of Jekyll Now that you're using
