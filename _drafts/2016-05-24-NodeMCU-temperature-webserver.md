@@ -7,12 +7,12 @@ published: false
 ''' Lua
 
 
- -- I declare the modules I'm going to use
+     -- I declare the modules I'm going to use
     
     require('ds18b20')
 	dht=require("dht")
    
---DHT22 part
+    --DHT22 part
     
     status,temp,humi,temp_decimial,humi_decimial = dht.read(2)
         if( status == dht.OK ) then
@@ -32,19 +32,19 @@ published: false
 		
 		port = 80
 
--- ESP-01 GPIO Mapping
-gpio0, gpio2 = 3, 4
+    -- ESP-01 GPIO Mapping
+    gpio0, gpio2 = 3, 4
 
 
---ds18b20 part
+     --ds18b20 part
 
-ds18b20.setup(gpio2)
+     ds18b20.setup(gpio2)
 
 
---web-server part
+     --web-server part
 
-srv=net.createServer(net.TCP)
-srv:listen(port,
+  srv=net.createServer(net.TCP)
+  srv:listen(port,
      function(conn)
           conn:send("HTTP/1.1 200 OK\nContent-Type: text/html\nRefresh: 5\n\n" ..
               "<!DOCTYPE HTML>" ..
@@ -60,8 +60,8 @@ srv:listen(port,
               "</html></body>")          
           conn:on("sent",function(conn) conn:close() end)
      end
-)
+ )
 
--- DO NOT release modules!
+   -- DO NOT release modules!
 
 '''
