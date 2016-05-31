@@ -1,27 +1,22 @@
 ---
 published: false
 ---
-## A New Post
+## A simple webserver to control room temperature, humidity and external temperature with NodeMCU
 
 
 ''' Lua
-
-
-     -- I declare the modules I'm going to use
-    
-    require('ds18b20')
+    -- I declare the modules I'm going to use
+        require('ds18b20')
 	dht=require("dht")
-   
     --DHT22 part
-    
     status,temp,humi,temp_decimial,humi_decimial = dht.read(2)
         if( status == dht.OK ) then
             --temperature = temp.."."..(temp_decimial) --/100
             --humidity = humi.."."..(humi_decimial) --/100
             --print("Temperature: "..temperature.." deg C")
             --print("Humidity: "..humidity.."%")
-			print("Temperatura:" ..temp.." C")
-			print("Umidità: " ..humi.."%")
+	print("Temperatura:" ..temp.." C")
+	print("Umidità: " ..humi.."%")
         elseif( status == dht.ERROR_CHECKSUM ) then          
             print( "DHT Checksum error" )
             temperature=-1 --TEST
@@ -30,18 +25,16 @@ published: false
             temperature=-2 --TEST
         end
 		
-		port = 80
+port = 80
 
-    -- ESP-01 GPIO Mapping
-    gpio0, gpio2 = 3, 4
-
-
-     --ds18b20 part
-
-     ds18b20.setup(gpio2)
+-- ESP-01 GPIO Mapping
+gpio0, gpio2 = 3, 4
 
 
-     --web-server part
+--ds18b20 part
+ds18b20.setup(gpio2)
+
+--web-server part
 
   srv=net.createServer(net.TCP)
   srv:listen(port,
@@ -63,5 +56,4 @@ published: false
  )
 
    -- DO NOT release modules!
-
 '''
