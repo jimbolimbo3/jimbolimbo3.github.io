@@ -1,0 +1,55 @@
+<html>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+<body>
+    <P>Ora partenza:<br><br>
+    <input type="number" name="StartHourl" id="StartHourl" min="0" max="24" step="1" value="00"  onchange="setValue(this)">
+    <P>Minuto partenza:<br><br>
+    <input type="number" name="StartMinl" id="StartMinl" min="0" max="60" step="1" value="00"  onchange="setValue(this)">
+    <P>Ora fine:<br><br>
+    <input type="number" name="StopHourl" id="StopHourl" min="0" max="24" step="1" value="00"  onchange="setValue(this)">
+    <P>Minuto fine:<br><br>
+    <input type="number" name="StopMinl" id="StopMinl" min="0" max="60" step="1" value="00"  onchange="setValue(this)">
+    <!-- This adds the tick marks to the range but does not in Safari -->
+     <br><br>
+    
+    <br><br>
+    <P>Ora di partenza:<span id="startHourl"></span><br>
+    <P>Minuto di partenza:<span id="startMinl"></span><br>
+    <P>Ora di fine:<span id="stopHourl"></span><br>
+    <P>Minuto di fine:<span id="stopMinl"></span><br>
+
+    <script type="text/javascript">
+      var deviceID    = "<<7ab79cfbb46e4af563680ed8>>";
+      var accessToken = "<<e82f78110cde09d3020b88e6d37f529c5d59211f>>";
+      var setFunc = "startHourl";
+      var getFunc = "getpos";
+
+      window.setInterval(function() {
+        requestURL = "https://api.spark.io/v1/devices/" + deviceID + "/" + getFunc + "/?access_token=" + accessToken;
+        $.getJSON(requestURL, function(json) {
+                 document.getElementById("curPos").innerHTML = json.result + "&deg;";
+                 document.getElementById("curPos").style.fontSize = "28px";
+                 document.getElementById("degBoxId").value = parseInt(json.result);
+                 });
+      }, 1000);
+
+      function setValue(obj) {
+        var newValue = document.getElementById('degBoxId').value;
+        sparkSetPos(newValue);
+      }
+      
+      function fineAdjust(value) {
+        var currentValue = parseInt(document.getElementById('curPos').innerHTML);
+        var setValue = value + currentValue;
+        sparkSetPos(setValue);
+        document.getElementById("degBoxId").value = setValue;
+      }
+
+      function sparkSetPos(newValue) {
+	var requestURL = "https://api.spark.io/v1/devices/" +deviceID + "/" + setFunc + "/";
+        $.post( requestURL, { params: newValue, access_token: accessToken });
+      }
+
+    </script>
+</body>
+</html>
