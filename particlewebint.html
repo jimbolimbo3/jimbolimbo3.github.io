@@ -1,47 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<html>
+<head>
+<title>OO Number spinner</title>
+<style type="text/css">
+
+body {font:normal 12px Verdana}
+.comment {font-style:italic}
+.sample {border:1px solid black;background-color:silver}
+
+
+.noright {border-right:0px;text-align:right}
+.noleft {border-left:0px;}
+.noleftright {border-left:0px;border-right:0px;width:5px;text-align:center;}
+.spinButtonContainer {width:20px;}
+.spinButtonContainer input{width:20px;height:11px;font:bold 7px Webdings;}
+
+</style>
+<script type="text/javascript">
+
+/************************
+Author: Glenn G. Vergara
+Email: glenngv@yahoo.com
+Philippines
+
+Please keep this intact 
+if you want to use it.
+Thanks.
+*************************/
+
+ var continueSpin=false;
+ var currentTarget = new Object();
+ currentTarget.field=null;
+ currentTarget.spinner=null;
+
+ /**
+ @param targetField - The target field object.
+ @param btnUp - The associated 'Up' button.
+ @param btnDn - The associated 'Down' button.
+ @param minValue - The minimum value.
+ @param maxValue - The maximum value.
+ @param oneToOne - Specifies if targetField is tied-up to only one set of Up/Down buttons or not. (boolean)
+ @param btnContainerId - The id container (span) where the Up/Down buttons are located.
+ @param interval - The interval between succeeding numbers. Optional. (default is 1)
+ @param hasLeadingZero - Specifies if single digits must have leading zero or not. Optional. (default is false)
+ **/
+ function NumberSpinner(targetField,btnUp,btnDn,minValue,maxValue,oneToOne,btnContainerId,interval,hasLeadingZero){
+   var me = this;
+   this.targetField = targetField;
+   this.minValue = minValue;
+   this.maxValue = maxValue;
+   this.oneToOne = oneToOne;
+   this.btnId = btnContainerId;
+   this.interval = (typeof interval!='undefined' && interval!=null && interval>0) ? interval:1; //default is 1
+   this.hasLeadingZero = (typeof hasLeadingZero!='undefined' && hasLeadingZero!=null) ? hasLeadingZero:false; //default is false
+   
+   //attach event handlers automatically
+   targetField.onfocus = function(){setTarget(targetField,me)};
+   targetField.onblur = function(){if (isNaN(parseInt(this.value,10))) this.value=me.minValue;}
+   if (!btnUp.onmousedown) 
+     btnUp.onmousedown = function(){
+   	   if (me.oneToOne) setTarget(me.targetField,me);
+   	   startSpin(1,me.btnId);
+     }
+   if (!btnUp.onmouseup) btnUp.onmouseup = stopSpin;
+   if (!btnDn.onmousedown) 
+     btnDn.onmousedown = function(){
+   	   if (me.oneToOne) setTarget(me.targetField,me);
+   	   startSpin(0,me.btnId);
+     }
+   if (!btnDn.onmouseup) btnDn.onmouseup = stopSpin;
+   
+ } 
+
+ function setTime(mode,btnId){//mode:1=up, 0=down
+    //stop spinning
+    if (!continueSpin || !currentTarget.field || (currentTarget.spinner && currentTarget.spinner.btnId!=btnId)) return;
+
+    //get current value
+    var spinValue=parseInt(currentTarget.field.value,10);
+
+    //set default value if not numeric
+    if (isNaN(spinValue)) spinValue=currentTarget.spinner.minValue-currentTarget.spinner.interval;
+
+    //get next value
+    spinValue = (mode==0) ? spinValue-currentTarget.spinner.interval:spinValue+currentTarget.spinner.interval;
+
+    //out of range?
+    if (spinValue>currentTarget.spinner.maxValue) spinValue=currentTarget.spinner.minValue; 
+    else if (spinValue<currentTarget.spinner.minValue) spinValue=currentTarget.spinner.maxValue;
+
+    //set leading zero
+    if (currentTarget.spinner.hasLeadingZero && spinValue<10) spinValue="0"+spinValue;
+
+    //set value to target field
+    currentTarget.field.value=spinValue;	
+    currentTarget.field.select();
+    currentTarget.field.focus();			
+
+    //continue spinning
+    setTimeout(function(){setTime(mode,btnId)},200);
+ }
+ 
+ function startSpin(mode, btnId){
+   continueSpin = true;
+   setTime(mode, btnId);
+ }
+ 
+ function stopSpin(){
+   	continueSpin = false;
+   	if (currentTarget.field) currentTarget.field.focus();
+ }
+ 
+ function setTarget(focusedObj, spinnerObj){
+   currentTarget.field = focusedObj;
+   currentTarget.spinner = spinnerObj;
+   if (focusedObj) {
+   	 focusedObj.select();
+   }
+ }
+ //NOTE: if you have other window.onfocus (or '<body onfocus' in HTML) handler anywhere, you must combine them
+ window.onfocus=function(){setTarget(null,null);}
+
+ var spinnerHour;
+ var spinnerMin;
+ var spinnerDay;
+ 
+ function initSpinner(){
+   var f = document.timerForm;
+   spinnerHour = new NumberSpinner(f.hhFrom,f.btnUp1,f.btnDn1,0,23,false,'btnTime1',1,true);
+   spinnerMin = new NumberSpinner(f.mmFrom,f.btnUp1,f.btnDn1,0,59,false,'btnTime1',1,true);
+   spinnerDay = new NumberSpinner(f.days,f.btnUp2,f.btnDn2,0,50,true,'btnTime2',5,false);
+   
+   //NOTE: if you have other document.onmousedown (or '<body onmousedown' in HTML) handler anywhere, you must combine them
+   document.onmousedown=function(e){
+     var targ = (e)?e.target:event.srcElement;
+     if (currentTarget.field!=null && targ.onfocus && targ.onfocus.toString().indexOf('setTarget')==-1){
+       setTarget(null,null);
+     }
+   }
+ }
+ //NOTE: if you have other window.onload (or '<body onload' in HTML) handler anywhere, you must combine them
+ window.onload=initSpinner;
+</script>
+</head>
+<body>
+<form name="timerForm">
+  <div class="sample">
+<p>
+<strong>Inizio (hh:mm)</strong> <input name="hhFrom" size="1" maxlength="2" class="noright" value="00" /><input class="noleftright" value=":" readonly onselectstart="return false" /><input name="mmFrom" size="1" maxlength="2" class="noleft" value="00" /><span id="btnTime1" class="spinButtonContainer">
+<input type="button" name="btnUp1" value="5" title="Increase" /><input type="button" name="btnDn1" value="6" title="Decrease" /></span> <span class="comment"></span>
+</p>
+<p>
+<strong>Fine (hh:mm)</strong> <input name="hhFrom" size="1" maxlength="2" class="noright" value="00" /><input class="noleftright" value=":" readonly onselectstart="return false" /><input name="mmFrom" size="1" maxlength="2" class="noleft" value="00" /><span id="btnTime1" class="spinButtonContainer">
+<input type="button" name="btnUp1" value="5" title="Increase" /><input type="button" name="btnDn1" value="6" title="Decrease" /></span> <span class="comment"></span>
+</p>
+
+
+</div>
+
+
+</form>
+</body>
+</html>
+
+
+
+
  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script>
 <script src="vendor/angular-moment-picker/angular-moment-picker.min.js"></script>
 <link href="vendor/angular-moment-picker/angular-moment-picker.min.css" rel="stylesheet">
  
- <table width="1920" border="1">
-  <tbody>
-    <tr>
-      <th scope="col">Lunedì</th>
-      <th scope="col">Martedì</th>
-      <th scope="col">Mercoledì</th>
-      <th scope="col">Giovedì</th>
-      <th scope="col">Venerdì</th>
-      <th scope="col">Sabato</th>
-      <th scope="col">Domenica</th>
-    </tr>
-  </tbody>
-</table>
 
- <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-    <input type="text" class="form-control" value="13:14">
-    <span class="input-group-addon">
-        <span class="glyphicon glyphicon-time"></span>
-    </span>
-</div>
-<script type="text/javascript">
-$('.clockpicker').clockpicker();
-</script>
- 
- 
- 
- 
- <div moment-picker="ctrl.myInput"
-     locale="it"
-     format="LLL"
-     min-view="day"
-     start-view="minute"
-     autoclose="true"
-     today="true">
-    {{ ctrl.myInput }}
-</div>
+
+
  
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -90,31 +224,26 @@ $('.clockpicker').clockpicker();
     <div id="interface" style="display:none;">
       <div class="row"> </div>
 
-      <div class="row">
-<div class="col-md-6">
-        <div class="panel panel-default" id="execution-history" style="display:none;">
-            <div class="panel-heading"><strong>Execution history</strong><button class="btn btn-danger pull-right btn-xs" onclick="clearHistory()">Clear</button></div>
-            <div class="panel-body">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <td>Function</td>
-                    <td>Param<span class="hidden-xs">eter</span>s</td>
-                    <td>Return</td>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+      
 
       <div class="row">
         <div class="col-md-12">
           <div class="panel panel-default" id="variables" style="display:none;">
             <div class="panel-heading"><strong>Variables</strong></div>
             <div class="panel-body">
+              <table width="800" border="1">
+  <tbody>
+    <tr>
+      <th scope="col">Lunedì</th>
+      <th scope="col">Martedì</th>
+      <th scope="col">Mercoledì</th>
+      <th scope="col">Giovedì</th>
+      <th scope="col">Venerdì</th>
+      <th scope="col">Sabato</th>
+      <th scope="col">Domenica</th>
+    </tr>
+  </tbody>
+</table>
               <table class="table table-striped">
                 <thead>
                   <tr>
