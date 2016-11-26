@@ -1,52 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment-with-locales.js"></script>
-<script src="vendor/angular-moment-picker/angular-moment-picker.min.js"></script>
-<link href="vendor/angular-moment-picker/angular-moment-picker.min.css" rel="stylesheet">
- 
- <table width="1920" border="1">
-  <tbody>
-    <tr>
-      <th scope="col">Lunedì</th>
-      <th scope="col">Martedì</th>
-      <th scope="col">Mercoledì</th>
-      <th scope="col">Giovedì</th>
-      <th scope="col">Venerdì</th>
-      <th scope="col">Sabato</th>
-      <th scope="col">Domenica</th>
-    </tr>
-  </tbody>
-</table>
-
- <div class="input-group clockpicker" data-placement="left" data-align="top" data-autoclose="true">
-    <input type="text" class="form-control" value="13:14">
-    <span class="input-group-addon">
-        <span class="glyphicon glyphicon-time"></span>
-    </span>
-</div>
-<script type="text/javascript">
-$('.clockpicker').clockpicker();
-</script>
- 
- 
- 
- 
- <div moment-picker="ctrl.myInput"
-     locale="it"
-     format="LLL"
-     min-view="day"
-     start-view="minute"
-     autoclose="true"
-     today="true">
-    {{ ctrl.myInput }}
-</div>
- 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Imposta timer irrigazione</title>
+  <title>Particle Cloud Web Interface</title>
 
   <link rel="stylesheet" href="https://bootswatch.com/cosmo/bootstrap.css">
 
@@ -88,11 +46,39 @@ $('.clockpicker').clockpicker();
 
     <!-- Interface -->
     <div id="interface" style="display:none;">
-      <div class="row"> </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default" id="devices">
+            <div class="panel-heading"><strong>Devices</strong><button class="btn btn-warning pull-right btn-xs" onclick="logOut()">Logout</button></div>
+            <div class="panel-body">
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="1" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div class="row">
-<div class="col-md-6">
-        <div class="panel panel-default" id="execution-history" style="display:none;">
+        <div class="col-md-6">
+          <div class="panel panel-default" id="functions" style="display:none;">
+            <div class="panel-heading"><strong>Functions</strong></div>
+            <div class="panel-body">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <td>Name</td>
+                    <td>Device</td>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="panel panel-default" id="execution-history" style="display:none;">
             <div class="panel-heading"><strong>Execution history</strong><button class="btn btn-danger pull-right btn-xs" onclick="clearHistory()">Clear</button></div>
             <div class="panel-body">
               <table class="table table-striped">
@@ -136,7 +122,14 @@ $('.clockpicker').clockpicker();
 
   </div>
 
-  
+  <footer>
+    <div class="container">
+      <iframe src="http://ghbtns.com/github-btn.html?user=suda&repo=particle-web-interface&type=fork&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="62" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=suda&repo=particle-web-interface&type=watch&count=true" allowtransparency="true" frameborder="0" scrolling="0" width="80" height="20"></iframe>
+      <iframe src="http://ghbtns.com/github-btn.html?user=suda&type=follow&count=true" allowtransparency="true" frameborder="0" scrolling="0"width="165" height="20"></iframe>
+    </div>
+  </footer>
+
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <!-- Latest compiled and minified JavaScript -->
