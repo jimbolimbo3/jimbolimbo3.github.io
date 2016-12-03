@@ -1,55 +1,87 @@
 <html>
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+
+<head>
+    <title>Spark function buttons Example</title>
+</head>
+
 <body>
-    <P>Ora partenza:<br><br>
-    <input type="number" name="StartHourl" id="StartHourl" min="0" max="24" step="1" value="00"  onchange="setValue(this)">
-    <P>Minuto partenza:<br><br>
-    <input type="number" name="StartMinl" id="StartMinl" min="0" max="60" step="1" value="00"  onchange="setValue(this)">
-    <P>Ora fine:<br><br>
-    <input type="number" name="StopHourl" id="StopHourl" min="0" max="24" step="1" value="00"  onchange="setValue(this)">
-    <P>Minuto fine:<br><br>
-    <input type="number" name="StopMinl" id="StopMinl" min="0" max="60" step="1" value="00"  onchange="setValue(this)">
-    <!-- This adds the tick marks to the range but does not in Safari -->
-     <br><br>
-    
-    <br><br>
-    <P>Ora di partenza:<span id="startHourl"></span><br>
-    <P>Minuto di partenza:<span id="startMinl"></span><br>
-    <P>Ora di fine:<span id="stopHourl"></span><br>
-    <P>Minuto di fine:<span id="stopMinl"></span><br>
 
-    <script type="text/javascript">
-      var deviceID    = "<<7ab79cfbb46e4af563680ed8>>";
-      var accessToken = "<<e82f78110cde09d3020b88e6d37f529c5d59211f>>";
-      var setFunc = "startHourl";
-      var getFunc = "getpos";
+    <input type="text" class="form-control" placeholder="Start Hour?" id="startHour">
+    <input type="text" class="form-control" placeholder="Start Minute?" id="startMinute">
+    <input type="text" class="form-control" placeholder="Stop Hour?" id="stopHour">
+    <input type="text" class="form-control" placeholder="Stop Minute?" id="stopMinute">
 
-      window.setInterval(function() {
-        requestURL = "https://api.spark.io/v1/devices/" + deviceID + "/" + getFunc + "/?access_token=" + accessToken;
-        $.getJSON(requestURL, function(json) {
-                 document.getElementById("curPos").innerHTML = json.result + "&deg;";
-                 document.getElementById("curPos").style.fontSize = "28px";
-                 document.getElementById("degBoxId").value = parseInt(json.result);
-                 });
-      }, 1000);
+    <br>
 
-      function setValue(obj) {
-        var newValue = document.getElementById('degBoxId').value;
-        sparkSetPos(newValue);
-      }
-      
-      function fineAdjust(value) {
-        var currentValue = parseInt(document.getElementById('curPos').innerHTML);
-        var setValue = value + currentValue;
-        sparkSetPos(setValue);
-        document.getElementById("degBoxId").value = setValue;
-      }
+    <button type="button" onclick="sendValues()">Send values</button>
+    <!--
+    <button type="button" onclick="functionCall('functionName', 'functionArgument')">function 1</button>
+    <button type="button" onclick="functionCall('functionName', 'functionArgument')">function 2</button>
+    <button type="button" onclick="functionCall('functionName', 'functionArgument')">function 3</button>
+    <button type="button" onclick="functionCall('functionName', 'functionArgument')">function 4</button>
+    -->
 
-      function sparkSetPos(newValue) {
-	var requestURL = "https://api.spark.io/v1/devices/" +deviceID + "/" + setFunc + "/";
-        $.post( requestURL, { params: newValue, access_token: accessToken });
-      }
 
+    <script src="http://cdn.jsdelivr.net/sparkjs/1.0.0/spark.min.js"></script>
+    <script>
+        //you can use your accesstoken, or your email/passsword to log in. Uncomment accordingly below.
+
+        var accessToken = "accesstoken_here";
+        var deviceID = "deviceID_here";
+
+        var startHour;
+        var startMinute;
+        var stopHour;
+        var stopMinute;
+
+        var combinedTime;
+
+        //console.log(startHour + startMinute + stopHour + stopMinute);
+
+        function sendValues() {
+            startHour = document.getElementById('startHour');
+            startMinute = document.getElementById('startMinute');
+            stopHour = document.getElementById('stopHour');
+            stopMinute = document.getElementById('stopMinute');
+
+            combinedTime = startHour.value + '~' + startMinute.value + '~' + stopHour.value + '~' + stopMinute.value;
+            console.log(combinedTime);
+
+            functionCall('parse', combinedTime);
+
+            startHour.value = '';
+            startMinute.value = '';
+            stopHour.value = '';
+            stopMinute.value = '';
+        }
+
+
+        spark.on('login', function(response) {
+            console.log(response);
+        });
+
+        // callback to be executed by each core
+        var callback = function(err, data) {
+            if (err) {
+                console.log('An error occurred while getting device attrs:', err);
+            } else {
+                console.log('Device attr retrieved successfully:', data);
+            }
+        };
+
+        function functionCall(functionName, functionArgument) {
+            // The function needs to be defined  in the firmware uploaded to the
+            // the Spark core and registered to the Spark cloud, same thing we do
+            // with variables. You pass along the name of the function and the params.
+            spark.callFunction(deviceID, functionName, functionArgument, callback);
+        }
+
+        // Uncomment a line below depending on your preferred log-in method.   
+        //spark.login({ username: 'email@example.com', password: 'password' });  
+        spark.login({
+            accessToken: accessToken
+        });
     </script>
 </body>
+
 </html>
