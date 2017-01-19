@@ -75,12 +75,12 @@
     // The function needs to be defined  in the firmware uploaded to the
     // the particle core and registered to the particle cloud, same thing we do
     // with variables. You pass along the name of the function and the params.
-    particle.callFunction(deviceID, functionName, functionArgument, callback);  
+    spark.callFunction(deviceID, functionName, functionArgument, callback);  
   }
   
   // Uncomment a line below depending on your preferred log-in method.   
   //particle.login({ username: 'email@example.com', password: 'password' });  
-  particle.login({ accessToken: accessToken });
+  spark.login({ accessToken: accessToken });
   
 </script>
   </body>
