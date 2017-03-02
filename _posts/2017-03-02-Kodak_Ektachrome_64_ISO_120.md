@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A New Link For The Website
+title: KODAK Ektachrome 64 ISO 120
 ---
 
 ## I used a depleted KODAK Ektachrome 64 ISO 120 with mine Lomo Lubitel 166b, thoise are the results:
