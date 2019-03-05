@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8"><link href="People%20Counter_files/bootstrap.htm" rel="stylesheet" media="screen"><title>
+	People Counter
+</title>
+    <meta http-equiv="refresh" content="20">
+     <script type="text/css">
+    </script>
+</head>
+<body>
+    <form method="post" action="./" id="form1">
+<div class="aspNetHidden">
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="lBqir6CA8WuQM97vhujZipNivnlZjK0s2IMOlYBpnou+kdpvAY0YLXv4yiL68AqbVgFvNu+86QOcWgpMq7LBfdGDWQMMLlF+OZgcJJhc4Fs=" type="hidden">
+</div>
+
+
+<script src="People%20Counter_files/gauge.js" type="text/javascript"></script>
+<script src="People%20Counter_files/jquery-3.js" type="text/javascript"></script>
+<div class="aspNetHidden">
+
+	<input name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="A36FACB9" type="hidden">
+</div>
+    <div>
+        
+   
+    <script type="text/javascript">
+        function ShowTitle(id) {
+            var span = document.getElementById('tooltip_' + id);
+            if (!span) {
+                var div = $('#labelDIV_' + id).append('<span id="tooltip_' + id + '" style="font-family: sans-serif;font-size:30px;background: white;border: 1px solid black;padding: 4px;left: 0;white-space: nowrap;display: inline-block;">' + $('#img_' + id).attr("title") + '</span>');
+            }
+            else {
+                var div = document.getElementById('labelDIV_' + id);
+                if (div && span) {
+                    div.removeChild(span);
+                }
+            }
+        }
+
+        function HideTitle(id) {
+            var div = document.getElementById('labelDIV_' + id);
+            var span = document.getElementById('tooltip_' + id);
+            if (div && span) {
+                div.removeChild(span);
+            }
+        }
+
+    </script>
+
+    </div>
+    
+
+<script type="text/javascript" language="Javascript" id="StartupScript_1">
+var opts1 = {  angle: -0.2,  lineWidth: 0.2,  radiusScale: 1,  pointer: {    length: 0.55,    strokeWidth: 0.031,    color: '#000000'  },  staticZones: [     {strokeStyle: "#30B32D", min: 0, max: 172},     {strokeStyle: "#FFDD00", min: 172, max: 345},     {strokeStyle: "#F03E3E", min:  345, max:  524}      ],  staticLabels: {    font: "35px sans-serif",    labels: [524],    color: "#000000",    fractionDigits: 0   },  limitMax: true,  limitMin: true,  colorStart: '#6FADCF',  colorStop: '#8FC0DA',  strokeColor: '#E0E0E0',  generateGradient: true,  highDpiSupport: true,};  
+$(document).ready(function() { 
+var target = document.getElementById('1');if(!target){alert('no target');}var gauge = new Gauge(target).setOptions(opts1);gauge.maxValue = 524;gauge.setMinValue(0);gauge.animationSpeed = 32;gauge.set(3036);
+ });
+
+ </script></form>
+
+
+<div id="containerDIV_1" style="text-align: center; width:800; height:800;"><div id="labelDIV_1" style="display: block; text-align:center;"><span id="lbl_1" style="font-size: 40px; font-family: sans-serif">Corona Blu Restaurant</span></div><span id="lblEmptySeats_1" style="display: block; font-size: 40px; font-family: sans-serif">0 Available Seats</span><canvas id="1" style="text-align:center; margin:0 auto; display:block; width:85%; height:85%; padding-top:0px" height="527" width="1054"></canvas><br></div></body></html>
