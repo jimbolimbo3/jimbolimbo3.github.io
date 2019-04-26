@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>DEMO COSTA HID</title>
+</head>
+<body>
+
+    Enable HID device?: <input type="checkbox" id="deviceCanRead" onclick="controlReading()"> 
+    <p id="txt1">Costa USB Reader</p>
+    <p id="deviceStatus" style="display:none">Reading is Enabled!</p>
+    
+    <script>
+        var canRead = false;
+        var buffer = '';
+
+        function controlReading() {
+            // (this is an example) This is to enable the device reading. 
+            var checkBox = document.getElementById("deviceCanRead");
+
+            if (checkBox.checked == true){
+                deviceStatus.style.display = "block";
+                canRead = true;
+                
+            } else {
+                var txt1 = document.getElementById("txt1");
+                deviceStatus.style.display = "none";
+                txt1.textContent = "Costa USB Reader";
+                canRead = false;
+            }
+        }
+
+        document.addEventListener('keypress', function (action) {
+            if (action.key != 'Enter' && canRead){
+                buffer += action.key;
+                // This is the core validation that will get the value from the HID card and execute whatever function they want.
+                // I this example, we are evaluating ID codes of 7 digits AND the device needs to be enabled (canRead = TRUE).
+                if( buffer.length >= 7 && canRead ) {
+                    document.getElementById("txt1").textContent = buffer;
+                    buffer = '';
+                }
+            }
+         });
+
+    </script>
+</body>
+</html>
