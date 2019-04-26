@@ -34,8 +34,8 @@
             if (action.key != 'Enter' && canRead){
                 buffer += action.key;
                 // This is the core validation that will get the value from the HID card and execute whatever function they want.
-                // I this example, we are evaluating ID codes of 7 digits AND the device needs to be enabled (canRead = TRUE).
-                if( buffer.length >= 7 && canRead ) {
+                // I this example, we are evaluating ID codes of 9 [COSTA CARD NUMBER IS 9 DIGITS] digits AND the device needs to be enabled (canRead = TRUE).
+                if( buffer.length >= 9 && canRead ) {
                     document.getElementById("txt1").textContent = buffer;
                     buffer = '';
                 }
